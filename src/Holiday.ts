@@ -1,7 +1,7 @@
 export class Holiday {
     sayHello() {
         const today = this.getToday();
-        if (today.getMonth() === 11 && today.getDate() === 25) {
+        if (today.getMonth() === 11 && (today.getDate() === 25 || today.getDate() === 24)) {
             return 'Merry Xmas'
         }
 
