@@ -50,9 +50,19 @@ describe('authenticate account is valid', function () {
         expect(authentication.is_valid(account, password)).toBe(true);
     }
 
+    function shouldVerifyFail(account: string, password: string) {
+        expect(authentication.is_valid(account, password)).toBe(false);
+    }
+
     it('should be valid', () => {
         givenPassword('91');
         givenToken('000000');
         shouldVerifyPass('joey', '91000000');
+    });
+
+    it('should be invalid', () => {
+        givenPassword('91');
+        givenToken('000000');
+        shouldVerifyFail('joey', '81000000');
     });
 });
