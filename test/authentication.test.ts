@@ -65,4 +65,12 @@ describe('authenticate account is valid', function () {
         givenToken('000000');
         shouldVerifyFail('joey', '81000000');
     });
+
+    it('should send message to account when invalid', () => {
+        givenPassword('91');
+        givenToken('000000');
+        shouldVerifyFail('joey', '81000000');
+        const spy = jest.spyOn(authentication, 'send');
+        expect(spy).toHaveBeenCalledTimes(1);
+    });
 });

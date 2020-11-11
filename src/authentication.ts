@@ -22,4 +22,8 @@ export class Authentication {
             return false;
         }
     }
+
+    send(account) {
+        console.log(`account: ${account} login failed`);
+    }
 }

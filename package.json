@@ -5,7 +5,8 @@
     "@babel/preset-typescript": "*",
     "@types/jest": "*",
     "babel-jest": "*",
-    "jest": "^26.6.1"
+    "jest": "^26.6.1",
+    "jest-mock-extended": "^1.0.10"
   },
   "dependencies": {
     "typescript": "^4.0.5"
