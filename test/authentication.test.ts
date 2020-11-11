@@ -1,4 +1,4 @@
-import {Authentication} from "../src/authentication";
+import {Authentication, INotification} from "../src/authentication";
 
 import {IToken} from "../src/otp";
 import {Profile} from "../src/profile";
@@ -27,15 +27,21 @@ class StubOtp implements IToken {
     }
 }
 
+class StubNotification implements INotification {
+    send(msg): void {}
+}
+
 describe('authenticate account is valid', function () {
     let stubProfile: StubProfile;
     let stubOtp: StubOtp;
+    let stubNotification: StubNotification;
     let authentication: Authentication;
 
     beforeEach(() => {
         stubProfile = new StubProfile();
         stubOtp = new StubOtp();
-        authentication = new Authentication(stubProfile, stubOtp);
+        stubNotification = new StubNotification();
+        authentication = new Authentication(stubProfile, stubOtp, stubNotification);
     })
 
     function givenPassword(password: string) {
@@ -67,10 +73,12 @@ describe('authenticate account is valid', function () {
     });
 
     it('should send message to account when invalid', () => {
+        const spy = jest.spyOn(stubNotification, 'send');
         givenPassword('91');
         givenToken('000000');
         shouldVerifyFail('joey', '81000000');
-        const spy = jest.spyOn(authentication, 'send');
-        expect(spy).toHaveBeenCalledTimes(1);
+        expect(spy).toHaveBeenCalled();
+        expect(spy).toBeCalledWith(expect.stringContaining('joey'));
+        expect(spy).toBeCalledWith(expect.stringContaining('login failed'));
     });
 });
