@@ -1,10 +1,9 @@
 import {Holiday} from "../src/Holiday";
 
 class HolidayStub extends Holiday {
-    private readonly today: Date;
+    private today: Date;
 
-    constructor(mm, dd) {
-        super();
+    public setToday(mm, dd) {
         this.today = new Date(2020, mm, dd)
     }
 
@@ -14,13 +13,19 @@ class HolidayStub extends Holiday {
 }
 
 describe('Holiday', () => {
+    let holiday: HolidayStub;
+
+    beforeEach(() => {
+        holiday = new HolidayStub();
+    })
+
     it('today is xmas', function () {
-        const holiday = new HolidayStub(11, 25);
+        holiday.setToday(11, 25);
         expect(holiday.sayHello()).toBe('Merry Xmas');
     });
 
     it('today is not xmas', function () {
-        const holiday = new HolidayStub(11, 24);
+        holiday.setToday(11, 23);
         expect(holiday.sayHello()).toBe('Today is not Xmas');
     });
 })
