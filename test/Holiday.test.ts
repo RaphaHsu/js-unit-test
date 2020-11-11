@@ -36,4 +36,9 @@ describe('Holiday', () => {
         givenToday(11, 23);
         outputShouldBe('Today is not Xmas');
     });
+    
+    it('today is xmas at Dec 24', function () {
+        givenToday(11, 24);
+        outputShouldBe('Today is Xmas');
+    });
 })
