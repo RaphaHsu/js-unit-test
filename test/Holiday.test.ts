@@ -9,4 +9,9 @@ describe('Holiday', () => {
         const holiday = new Holiday();
         expect(holiday.sayHello()).toBe('Merry Xmas');
     });
+
+    it('today is not xmas', function () {
+        const holiday = new Holiday();
+        expect(holiday.sayHello()).toBe('Today is not Xmas');
+    });
 })
