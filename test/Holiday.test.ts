@@ -19,13 +19,21 @@ describe('Holiday', () => {
         holiday = new HolidayStub();
     })
 
+    function givenToday(mm: number, dd: number) {
+        holiday.setToday(mm, dd);
+    }
+
     it('today is xmas', function () {
-        holiday.setToday(11, 25);
-        expect(holiday.sayHello()).toBe('Merry Xmas');
+        givenToday(11, 25);
+        outputShouldBe('Merry Xmas')
     });
 
+    function outputShouldBe(msg: string) {
+        expect(holiday.sayHello()).toBe(msg);
+    }
+
     it('today is not xmas', function () {
-        holiday.setToday(11, 23);
-        expect(holiday.sayHello()).toBe('Today is not Xmas');
+        givenToday(11, 23);
+        outputShouldBe('Today is not Xmas');
     });
 })
